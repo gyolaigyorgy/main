@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -12,7 +11,6 @@ export default function LoginPage() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -27,9 +25,11 @@ export default function LoginPage() {
       })
 
       if (response.ok) {
-        router.push('/dashboard')
+        // Full navigation so middleware sees the freshly set auth cookie
+        window.location.href = '/dashboard'
       } else {
         setError('Invalid password. Please try again.')
+        setIsLoading(false)
       }
     } catch {
       setError('An error occurred. Please try again.')
