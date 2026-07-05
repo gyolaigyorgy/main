@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 
 // Simple password gate authentication
-// Default password is "mpihub2024" - can be overridden with MPI_HUB_PASSWORD env var
-const VALID_PASSWORD = process.env.MPI_HUB_PASSWORD || 'mpihub2024'
+// Password is set to the original "mpihub2024"
+const VALID_PASSWORD = 'mpihub2024'
 
 export async function POST(request: NextRequest) {
   try {
